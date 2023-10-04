@@ -1,0 +1,42 @@
+<div class="container">
+  <h1>{{ titulo }}</h1>
+
+  <!-- Formulário para adicionar um novo animal -->
+  <mat-card class="mat-card-form">
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="novoAnimal.nome" placeholder="Digite o nome">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo</mat-label>
+        <input matInput [(ngModel)]="novoAnimal.tipo" placeholder="Digite o tipo">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="inserirAnimal()">Adicionar</button>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Lista de animais -->
+  <div class="lista-animais">
+    <h2>Lista de Animais</h2>
+    <ul>
+      <li *ngFor="let animal of animais; let i = index">
+        {{ animal.nome }} - {{ animal.tipo }}
+        <button (click)="removerAnimal(animal)">Remover</button>
+        <button (click)="iniciarEdicao(animal)">Editar</button>
+        <div *ngIf="animalEmEdicao && animalEmEdicao.id === animal.id">
+          <mat-form-field>
+            <input matInput [(ngModel)]="animalEmEdicao.nome" placeholder="Novo nome">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [(ngModel)]="animalEmEdicao.tipo" placeholder="Novo tipo">
+          </mat-form-field>
+          <button mat-button color="primary" (click)="concluirEdicao(animalEmEdicao)">Concluir</button>
+          <button mat-button color="warn" (click)="cancelarEdicao()">Cancelar</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
